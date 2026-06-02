@@ -1,12 +1,15 @@
 from fastapi import FastAPI
 
 from src.utils.response import success_response
+from src.routes.health_routes import router as health_router
 
 app = FastAPI(
   title="Python Conversation Engine",
   description="Un motor de conversación en Python para manejar interacciones de chat y procesamiento de lenguaje natural.",
   version="0.1.0"
 )
+
+app.include_router(health_router)
 
 @app.get("/")
 def root():
