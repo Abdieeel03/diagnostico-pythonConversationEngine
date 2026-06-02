@@ -1,8 +1,8 @@
-# diagnostico-pythonConversationEngine
+# 🧠 Motor de Conversacion Medica
 
 Motor de Conversacion en Python que recibe un texto con sintomas y devuelve una respuesta en lenguaje humano sobre posibles enfermedades. El proyecto esta en construccion.
 
-## Instalacion
+## ⚙️ Instalacion
 
 1. Crea y activa un entorno virtual.
 
