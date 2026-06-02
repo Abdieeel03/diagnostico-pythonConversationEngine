@@ -11,5 +11,6 @@ class Settings:
       'http://localhost:5000'
     )
     self.port = int(os.getenv('PORT', '8000'))
+    self.groq_api_key = os.getenv('GROQ_API_KEY', '')
 
 settings = Settings()
