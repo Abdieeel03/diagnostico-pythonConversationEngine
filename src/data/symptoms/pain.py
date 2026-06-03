@@ -1,0 +1,66 @@
+PAIN_SYMPTOMS = {
+  "dolor_cabeza": [
+    "dolor de cabeza",
+    "dolor cabeza",
+    "me duele la cabeza",
+    "me duele cabeza",
+    "cabeza me duele",
+    "cefalea",
+    "migraña",
+  ],
+  "dolor_articular": [
+    "dolor articular",
+    "dolor en las articulaciones",
+    "dolor de coyunturas",
+    "me duelen los huesos",
+    "artralgia",
+  ],
+  "dolor_quemante": [
+    "dolor quemante",
+    "ardor fuerte",
+    "dolor que quema",
+    "quemazón intensa",
+  ],
+  "dolor_muscular": [
+    "dolor muscular",
+    "mialgia",
+    "me duelen los músculos",
+    "dolor de cuerpo",
+  ],
+  "dolor_retroocular": [
+    "dolor retroocular",
+    "dolor detrás de los ojos",
+    "me duelen los ojos por dentro",
+    "presión tras los ojos",
+  ],
+  "dolor_articular_intenso": [
+    "dolor articular intenso",
+    "dolor fuerte en articulaciones",
+    "no puedo mover las articulaciones",
+    "artralgia severa",
+  ],
+  "inflamacion_articulaciones": [
+    "inflamación de articulaciones",
+    "coyunturas hinchadas",
+    "artritis",
+    "articulaciones inflamadas",
+  ],
+  "dolor_pecho": [
+    "dolor de pecho",
+    "dolor torácico",
+    "presión en el pecho",
+    "me duele al respirar",
+  ],
+  "dolor_masticar": [
+    "dolor al masticar",
+    "me duele al comer",
+    "mandíbula dolorida",
+    "dolor al abrir la boca",
+  ],
+  "dolores_musculares": [
+    "dolores musculares",
+    "mialgias",
+    "dolor en los músculos",
+    "cuerpo cortado",
+  ],
+}
