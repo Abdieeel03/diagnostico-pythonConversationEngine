@@ -66,21 +66,21 @@ DIGESTIVE_SYMPTOMS = {
     "deposiciones líquidas",
     "vientre suelto",
     "evacuaciones frecuentes",
-],
-"reflujo_gastrico": [
+  ],
+  "reflujo_gastrico": [
     "reflujo gástrico",
     "acidez",
     "ardor de estómago",
     "me sube el ácido",
     "regurgitación",
     "agruras",
-],
-"estrenimiento": [
+  ],
+  "estrenimiento": [
     "estreñimiento",
     "no puedo ir al baño",
     "constipación",
     "no evacuo",
     "heces duras",
     "no defeco",
-],
+  ],
 }
