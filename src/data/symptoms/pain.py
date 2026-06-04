@@ -29,6 +29,10 @@ PAIN_SYMPTOMS = {
     "dolor muscular",
     "mialgia",
     "me duelen los músculos",
+    "dolores musculares",
+    "mialgias",
+    "dolor en los músculos",
+    "cuerpo cortado",
   ],
   "dolor_cuerpo": [
     "dolor de cuerpo",
@@ -77,11 +81,5 @@ PAIN_SYMPTOMS = {
     "dolor ligero",
     "dolor suave",
     "dolor pequeño",
-  ],
-  "dolores_musculares": [
-    "dolores musculares",
-    "mialgias",
-    "dolor en los músculos",
-    "cuerpo cortado",
   ],
 }

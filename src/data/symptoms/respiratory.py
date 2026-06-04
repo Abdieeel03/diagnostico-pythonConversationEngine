@@ -13,7 +13,6 @@ RESPIRATORY_SYMPTOMS = {
     "no puedo respirar por la nariz",
     "mocos",
     "secreción nasal",
-    "secrecion nasal",
   ],
   "dolor_garganta": [
     "dolor de garganta",
@@ -26,7 +25,6 @@ RESPIRATORY_SYMPTOMS = {
   ],
   "perdida_olfato": [
     "pérdida de olfato",
-    "perdida de olfato",
     "no puedo oler",
     "olfato perdido",
     "olfato no funciona",
@@ -35,7 +33,8 @@ RESPIRATORY_SYMPTOMS = {
   ],
   "perdida_gusto": [
     "pérdida de gusto",
-    "perdida de gusto",
+    "gusto",
+    "sabor",
     "no puedo saborear",
     "gusto perdido",
     "gusto no funciona",
