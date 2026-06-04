@@ -88,56 +88,56 @@ PAIN_SYMPTOMS = {
     "dolor de cabeza insoportable",
     "cefalea severa",
     "me parte la cabeza",
-],
-"dolor_cabeza_opresivo": [
+  ],
+  "dolor_cabeza_opresivo": [
     "dolor de cabeza opresivo",
     "cabeza apretada",
     "presión en la cabeza",
     "dolor en banda en la cabeza",
     "como si me apretaran la cabeza",
-],
-"tension_cervical": [
+  ],
+  "tension_cervical": [
     "tensión cervical",
     "cuello tenso",
     "rigidez en el cuello",
     "nuca tensa",
     "dolor de cuello",
-],
-"tension_hombros": [
+  ],
+  "tension_hombros": [
     "tensión en los hombros",
     "hombros tensos",
     "hombros cargados",
     "dolor de hombros por tensión",
-],
-"sensibilidad_cuero_cabelludo": [
+  ],
+  "sensibilidad_cuero_cabelludo": [
     "sensibilidad en el cuero cabelludo",
     "cuero cabelludo sensible",
     "me duele el cuero cabelludo",
     "me duele el pelo al tocarlo",
-],
-"hormigueo_facial": [
+  ],
+  "hormigueo_facial": [
     "hormigueo facial",
     "me hormiguea la cara",
     "entumecimiento en la cara",
     "cosquilleo en la cara",
-],
-"calambres_piernas": [
+  ],
+  "calambres_piernas": [
     "calambres en las piernas",
     "calambre en la pierna",
     "calambres nocturnos",
     "espasmos en las piernas",
-],
-"angina": [
+  ],
+  "angina": [
     "angina de pecho",
     "dolor opresivo en el pecho al esforzarse",
     "presión en el pecho con el esfuerzo",
     "angina",
-],
-"dolor_irradiado": [
+  ],
+  "dolor_irradiado": [
     "dolor irradiado",
     "dolor que se extiende",
     "dolor que baja hacia la ingle",
     "dolor que viaja",
     "dolor que corre por el cuerpo",
-],
+  ],
 }

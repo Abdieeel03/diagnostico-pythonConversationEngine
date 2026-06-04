@@ -121,117 +121,117 @@ GENERAL_SYMPTOMS = {
     "vértigo",
     "me da vueltas la cabeza",
     "inestabilidad",
-],
-"vision_borrosa": [
+  ],
+  "vision_borrosa": [
     "visión borrosa",
     "veo borroso",
     "vista borrosa",
     "visión nublada",
     "veo nublado",
     "borrosa la vista",
-],
-"zumbido_oidos": [
+  ],
+  "zumbido_oidos": [
     "zumbido en los oídos",
     "tinnitus",
     "me zumban los oídos",
     "pitido en los oídos",
     "ruido en los oídos",
-],
-"palpitaciones": [
+  ],
+  "palpitaciones": [
     "palpitaciones",
     "corazón acelerado",
     "taquicardia",
     "latidos fuertes",
     "me siento el corazón",
     "latidos irregulares",
-],
-"fatiga": [
+  ],
+  "fatiga": [
     "fatiga",
     "fatiga persistente",
     "agotamiento físico",
     "me siento fatigado constantemente",
-],
-"sangrado_nasal": [
+  ],
+  "sangrado_nasal": [
     "sangrado nasal",
     "epistaxis",
     "me sangra la nariz",
     "sangre por la nariz",
     "hemorragia nasal",
-],
-"desmayos": [
+  ],
+  "desmayos": [
     "desmayos",
     "me desmayo",
     "síncope",
     "me desvanezco",
     "me caigo sin sentido",
     "me voy al suelo",
-],
-"confusion": [
+  ],
+  "confusion": [
     "confusión",
     "estoy confundido",
     "desorientado",
     "no pienso bien",
     "mente nublada",
     "me cuesta pensar",
-],
-"frio_extremidades": [
+  ],
+  "frio_extremidades": [
     "frío en las extremidades",
     "manos y pies fríos",
     "extremidades frías",
     "manos frías",
     "pies fríos",
-],
-"palidez": [
+  ],
+  "palidez": [
     "palidez",
     "piel pálida",
     "me veo pálido",
     "cara pálida",
     "estoy pálido",
-],
-"sudoracion_excesiva": [
+  ],
+  "sudoracion_excesiva": [
     "sudoración excesiva",
     "hiperhidrosis",
     "sudo mucho",
     "transpiración excesiva",
     "sudar demasiado",
-],
-"temblores": [
+  ],
+  "temblores": [
     "me tiemblan las manos",
     "temblor en el cuerpo",
     "me tiembla el cuerpo",
     "vibración interna",
     "temblor involuntario",
-],
-"nerviosismo": [
+  ],
+  "nerviosismo": [
     "nerviosismo",
     "estoy nervioso",
     "me siento ansioso",
     "nervios",
     "inquietud",
     "ansiedad",
-],
-"irritabilidad": [
+  ],
+  "irritabilidad": [
     "irritabilidad",
     "estoy irritable",
     "me irrito fácil",
     "mal humor",
     "estoy de mal humor",
     "me enojo fácil",
-],
-"depresion": [
+  ],
+  "depresion": [
     "depresión",
     "me siento deprimido",
     "tristeza profunda",
     "sin motivación",
     "desánimo",
     "melancolía",
-],
-"insomnio": [
+  ],
+  "insomnio": [
     "insomnio",
     "no puedo dormir",
     "dificultad para dormir",
     "me cuesta dormir",
     "no duermo bien",
     "problemas para dormir",
-],
+  ],
 }
