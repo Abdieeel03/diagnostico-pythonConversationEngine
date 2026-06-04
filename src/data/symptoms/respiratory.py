@@ -3,7 +3,6 @@ RESPIRATORY_SYMPTOMS = {
     "tos",
     "toser",
     "tose",
-    "tos seca",
     "estoy tosiendo",
   ],
   "congestion_nasal": [
@@ -67,5 +66,29 @@ RESPIRATORY_SYMPTOMS = {
     "tos sin flema",
     "tos irritativa",
     "tengo tos seca",
+  ],
+  "dificultad_respiratoria": [
+    "dificultad respiratoria",
+    "me cuesta respirar",
+    "falta de aire",
+    "disnea",
+  ],
+  "estornudos": [
+    "estornudos",
+    "estornudar",
+    "estornudo",
+    "tengo estornudos",
+  ],
+  "inflamacion_amigdalas": [
+    "inflamación de amígdalas",
+    "amígdalas inflamadas",
+    "anginas inflamadas",
+    "amigdalas hinchadas",
+  ],
+  "dolor_tragar": [
+    "dolor al tragar",
+    "me duele al tragar",
+    "dificultad al tragar",
+    "odinofagia",
   ],
 }

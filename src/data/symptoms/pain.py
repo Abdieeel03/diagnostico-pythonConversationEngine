@@ -7,6 +7,10 @@ PAIN_SYMPTOMS = {
     "cabeza me duele",
     "cefalea",
     "migraña",
+    "dolor de cabeza intenso",
+    "dolor fuerte de cabeza",
+    "cefalea intensa",
+    "me duele mucho la cabeza",
   ],
   "dolor_articular": [
     "dolor articular",
@@ -25,7 +29,12 @@ PAIN_SYMPTOMS = {
     "dolor muscular",
     "mialgia",
     "me duelen los músculos",
+  ],
+  "dolor_cuerpo": [
     "dolor de cuerpo",
+    "me duele el cuerpo",
+    "dolor en todo el cuerpo",
+    "cuerpo adolorido",
   ],
   "dolor_retroocular": [
     "dolor retroocular",
@@ -56,6 +65,18 @@ PAIN_SYMPTOMS = {
     "me duele al comer",
     "mandíbula dolorida",
     "dolor al abrir la boca",
+  ],
+  "dolor_espalda": [
+    "dolor de espalda",
+    "me duele la espalda",
+    "dolor en la espalda",
+    "espalda adolorida",
+  ],
+  "dolor_leve": [
+    "dolor leve",
+    "dolor ligero",
+    "dolor suave",
+    "dolor pequeño",
   ],
   "dolores_musculares": [
     "dolores musculares",

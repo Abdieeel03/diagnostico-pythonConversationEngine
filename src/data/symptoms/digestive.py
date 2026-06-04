@@ -6,6 +6,12 @@ DIGESTIVE_SYMPTOMS = {
     "anorexia",
     "desganado",
   ],
+  "falta_apetito": [
+    "falta de apetito",
+    "sin apetito",
+    "no tengo apetito",
+    "poco apetito",
+  ],
   "nauseas": [
     "náuseas",
     "ganas de vomitar",
@@ -41,6 +47,12 @@ DIGESTIVE_SYMPTOMS = {
     "dolor de panza",
     "dolor de estómago",
     "retortijones",
+  ],
+  "inflamacion_higado": [
+    "inflamación del hígado",
+    "hígado inflamado",
+    "hepatomegalia",
+    "dolor de hígado",
   ],
   "esplenomegalia": [
     "esplenomegalia",
