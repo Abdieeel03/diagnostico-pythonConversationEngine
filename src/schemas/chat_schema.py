@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class ChatMessage(BaseModel):
+class ChatRequest(BaseModel):
   message: str
