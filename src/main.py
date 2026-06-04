@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from src.utils.response import success_response
 from src.routes.health_routes import router as health_router
+from src.routes.chat_routes import router as chat_router
 
 app = FastAPI(
   title="Python Conversation Engine",
@@ -10,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(health_router)
+app.include_router(chat_router)
 
 @app.get("/")
 def root():

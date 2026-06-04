@@ -12,8 +12,9 @@ class GroqService:
       self,
       user_message: str,
       symptoms: list[str],
-      diagnosticos: list[dict],
-      most_probable: dict | None
+      diagnosticos: list[str],
+      most_probable: str | None,
+      context_note: str
   ) -> str:
     prompt = f"""
 Eres un asistente conversacional de orientación médica.
@@ -22,13 +23,16 @@ Mensaje original del usuario:
 {user_message}
 
 Síntomas detectados:
-{symptoms}
+{", ".join(symptoms)}
 
 Posibles enfermedades identificadas:
-{", ".join(d["enfermedad"] for d in diagnosticos)}
+{", ".join(diagnosticos) if diagnosticos else "ninguna"}
 
 Enfermedad con mayor compatibilidad:
-{most_probable["enfermedad"] if most_probable else "ninguna"}
+{most_probable if most_probable else "ninguna"}
+
+Contexto adicional:
+{context_note}
 
 Instrucciones:
 
@@ -41,7 +45,15 @@ Instrucciones:
 - No digas que es un diagnóstico definitivo.
 - Explica brevemente cuál es la enfermedad más compatible y menciona otras posibilidades si existen.
 - Finaliza indicando que se trata de una orientación y que ante síntomas persistentes debe consultarse a un profesional de salud.
+- Si hay pocos síntomas, responde máximo en 1 párrafo.
 - Máximo 2 párrafos.
+- No repitas varias veces que debe consultar a un profesional.
+
+MUY IMPORTANTE:
+Si no existe una enfermedad principal, no menciones enfermedades específicas
+como posibles causas.
+
+Limítate a indicar que la información es insuficiente y solicita más síntomas.
 """
     response = self.client.chat.completions.create(
       model="llama-3.3-70b-versatile",
