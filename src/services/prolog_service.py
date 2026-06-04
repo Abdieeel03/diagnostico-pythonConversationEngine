@@ -1,4 +1,5 @@
 import httpx
+from typing import Any
 
 from src.config.settings import settings
 
@@ -24,7 +25,7 @@ class PrologService:
         "data": None
       }
   
-  def get_diagnostico(self, sintomas: list[str]):
+  def get_diagnostico(self, sintomas: list[str]) -> dict[str, Any]:
     try:
       response = httpx.post(f"{self.base_url}/diagnostico", json={"sintomas": sintomas}, timeout= 10.0)
       
