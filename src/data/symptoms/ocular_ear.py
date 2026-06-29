@@ -10,20 +10,18 @@ OCULAR_EAR_SYMPTOMS = {
   ],
   "picazon_ocular": [
     "picazón ocular",
-    "me pica el ojo",
     "picor en los ojos",
     "comezón en los ojos",
   ],
   "lagrimeo": [
     "lagrimeo",
-    "me lloran los ojos",
     "ojos llorosos",
     "lagrimeo excesivo",
     "epífora",
   ],
   "ardor_ocular": [
     "ardor ocular",
-    "me arden los ojos",
+    "ardor en los ojos",
     "quema en los ojos",
     "escozor en los ojos",
   ],
@@ -37,21 +35,20 @@ OCULAR_EAR_SYMPTOMS = {
   # — Auditivas —
   "dolor_oido": [
     "dolor de oído",
-    "me duele el oído",
     "otalgia",
     "dolor en el oído",
     "oído que duele",
   ],
   "perdida_audicion": [
     "pérdida de audición",
-    "no oigo bien",
+    "oír mal",
     "sordera",
     "hipoacusia",
     "disminución de la audición",
   ],
   "zumbido_oido": [
     "zumbido en el oído",
-    "me zumba el oído",
+    "zumbido del oído",
     "pitido en el oído",
     "ruido en el oído",
   ],
@@ -70,14 +67,12 @@ OCULAR_EAR_SYMPTOMS = {
   ],
   "dificultad_audicion": [
     "dificultad auditiva",
-    "me cuesta escuchar",
+    "cuesta escuchar",
     "oigo mal",
-    "problemas para oír",
   ],
   "picazon_canal_auditivo": [
     "picazón en el canal auditivo",
-    "me pica el oído por dentro",
-    "picor en el oído",
+    "picor dentro del oído",
     "comezón en el oído",
   ],
   "enrojecimiento_canal": [
@@ -88,7 +83,7 @@ OCULAR_EAR_SYMPTOMS = {
   ],
   "sensibilidad_trago": [
     "sensibilidad del trago",
-    "me duele al tocar la entrada del oído",
+    "dolor al tocar la entrada del oído",
     "dolor al presionar el oído por fuera",
     "oído sensible al tacto externo",
   ],

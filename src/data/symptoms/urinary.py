@@ -5,13 +5,13 @@ URINARY_SYMPTOMS = {
     "quema al orinar",
     "escozor al orinar",
     "disuria",
-    "me duele cuando orino",
+    "dolor cuando orino",
   ],
   "frecuencia_urinaria": [
     "frecuencia urinaria",
-    "orino muchas veces",
-    "voy al baño a orinar seguido",
-    "necesito orinar constantemente",
+    "orinar muchas veces",
+    "orinar seguido",
+    "orinar constantemente",
   ],
   "orina_turbia": [
     "orina turbia",
@@ -34,9 +34,9 @@ URINARY_SYMPTOMS = {
   ],
   "urgencia_urinaria": [
     "urgencia urinaria",
-    "tengo que correr al baño",
-    "necesito orinar urgente",
-    "no aguanto las ganas de orinar",
+    "correr al baño",
+    "orinar urgente",
+    "ganas urgentes de orinar",
   ],
   "dolor_pelvis": [
     "dolor pélvico",
@@ -49,6 +49,6 @@ URINARY_SYMPTOMS = {
     "dolor fuerte en la espalda baja",
     "lumbalgia intensa",
     "dolor de riñones",
-    "me duele mucho la espalda baja",
+    "dolor muy fuerte en la espalda baja",
   ],
 }

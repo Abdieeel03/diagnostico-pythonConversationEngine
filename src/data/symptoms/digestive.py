@@ -1,7 +1,7 @@
 DIGESTIVE_SYMPTOMS = {
   "perdida_apetito": [
     "pérdida de apetito",
-    "no tengo hambre",
+    "sin hambre",
     "falta de ganas de comer",
     "anorexia",
     "desganado",
@@ -9,7 +9,6 @@ DIGESTIVE_SYMPTOMS = {
   "falta_apetito": [
     "falta de apetito",
     "sin apetito",
-    "no tengo apetito",
     "poco apetito",
   ],
   "nauseas": [
@@ -65,36 +64,30 @@ DIGESTIVE_SYMPTOMS = {
     "heces blandas",
     "deposiciones líquidas",
     "vientre suelto",
-    "evacuaciones frecuentes",
   ],
   "reflujo_gastrico": [
     "reflujo gástrico",
     "acidez",
-    "ardor de estómago",
-    "me sube el ácido",
+    "subida de ácido",
     "regurgitación",
     "agruras",
   ],
   "estrenimiento": [
     "estreñimiento",
-    "no puedo ir al baño",
+    "dificultad para ir al baño",
     "constipación",
     "no evacuo",
-    "heces duras",
     "no defeco",
   ],
   "fiebre": [
     "fiebre",
     "temperatura alta",
-    "sensación de calor",
     "me siento febril",
   ],
   "deshidratacion": [
     "deshidratación",
     "sed",
     "poca orina",
-    "cansancio",
-    "piel seca",
   ],
   "escalofrios": [
     "escalofríos",
@@ -104,7 +97,6 @@ DIGESTIVE_SYMPTOMS = {
   ],
   "ardor_estomacal": [
     "ardor de estómago",
-    "me duele el estómago",
     "dolor en el estómago",
     "estómago quemado",
   ],
@@ -121,7 +113,6 @@ DIGESTIVE_SYMPTOMS = {
     "sensación de llenura",
   ],
   "eructos": [
-    "tengo eructos",
     "gases",
     "eructar",
     "expulsar aire",
@@ -134,39 +125,18 @@ DIGESTIVE_SYMPTOMS = {
   ],
   "dificultad_tragar": [
     "dificultad para tragar",
-    "me cuesta tragar",
+    "cuesta tragar",
     "disfagia",
     "sensación de que la comida se queda atascada",
   ],
-  "tos_cronica": [
-    "tengo tos crónica",
-    "tos persistente",
-    "tos que no se quita",
-    "tos que dura mucho tiempo",
-  ],
-  "ronquera": [
-    "tengo ronquera",
-    "voz ronca",
-    "cambio de voz",
-    "voz áspera",
-  ],
   "dolor_garganta": [
-    "tengo dolor de garganta",
-    "me duele la garganta",
     "dolor en la garganta",
     "garganta dolorida",
   ],
   "mal_aliento": [
-    "tengo mal aliento",
     "halitosis",
     "aliento fétido",
     "aliento desagradable",
-  ],
-  "debilidad": [
-    "estoy débil",
-    "me siento débil",
-    "falta de energía",
-    "cansancio extremo",
   ],
   "distension_abdominal": [
     "distensión abdominal",
@@ -175,11 +145,7 @@ DIGESTIVE_SYMPTOMS = {
     "dolor por distensión",
   ],
   "gases": [
-    "tengo gases",
-    "me duele el estómago",
-    "dolor en el estómago",
-    "estómago quemado",
-    "estoy con gases",
+    "gases intestinales",
   ],
   "moco_heces": [
     "moco en las heces",
@@ -189,63 +155,45 @@ DIGESTIVE_SYMPTOMS = {
   ],
   "sensacion_evacuacion_incompleta": [
     "sensación de evacuación incompleta",
-    "siento que no termino de evacuar",
+    "evacuación incompleta",
     "no siento que vacíe el intestino",
     "sensación de que queda algo en el intestino",
   ],
   "malestar_abdominal": [
-    "tengo malestar abdominal",
-    "me siento mal del estómago",
+    "malestar abdominal",
+    "malestar de estómago",
     "dolor leve en el abdomen",
     "sensación de incomodidad en el abdomen",
   ],
   "dificultad_evacuar": [
     "dificultad para evacuar",
-    "me cuesta ir al baño",
-    "estreñimiento",
-    "no puedo defecar",
+    "cuesta ir al baño",
+    "dificultad para defecar",
   ],
   "heces_duras": [
-    "tengo heces duras",
-    "estreñimiento",
-    "no puedo ir al baño",
-    "constipación",
+    "heces duras",
   ],
   "evacuaciones_poco_frecuentes": [
     "evacuaciones poco frecuentes",
     "no voy al baño seguido",
-    "estreñimiento",
-    "constipación",
   ],
   "evacuaciones_frecuentes": [
     "evacuaciones frecuentes",
-    "diarrea",
-    "heces líquidas",
-    "vientre suelto",
   ],
   "heces_liquidas": [
-    "evacuaciones frecuentes",
-    "diarrea",
     "heces líquidas",
-    "vientre suelto",
     "evacuaciones líquidas",
   ],
-  "sangre_heces": [
+  "sangrado_heces": [
     "sangre en las heces",
     "heces con sangre",
     "sangrado rectal",
     "sangre al defecar",
   ],
-  "fatiga": [
-    "tengo fatiga",
-    "me siento fatigado",
-    "cansancio extremo",
-    "falta de energía",
-  ],
   "urgencia_evacuacion": [
     "urgencia para evacuar",
     "necesidad urgente de ir al baño",
-    "no puedo esperar para ir al baño",
+    "urgencia para ir al baño",
     "sensación de urgencia para defecar",
   ],
   "perdida_peso": [
@@ -268,13 +216,11 @@ DIGESTIVE_SYMPTOMS = {
   ],
   "dolor_anal": [
     "dolor anal",
-    "me duele el ano",
     "dolor en el ano",
     "malestar en el ano",
   ],
   "picazon_anal": [
     "picazón anal",
-    "me pica el ano",
     "picor en el ano",
     "malestar por picazón en el ano",
   ],
