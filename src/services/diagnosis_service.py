@@ -3,7 +3,7 @@ from src.services.prolog_service import prolog_service
 from src.services.groq_service import groq_service
 
 class DiagnosisService:
-  def process_message(self, message: str):
+  async def process_message(self, message: str):
     symptoms = nlp_service.extract_symptoms(message)
 
     if not symptoms:
@@ -14,7 +14,7 @@ class DiagnosisService:
         "most_probable": None,
       }
 
-    prolog_response = prolog_service.get_diagnostico(symptoms)
+    prolog_response = await prolog_service.get_diagnostico(symptoms)
 
     if not prolog_response.get("success"):
       return {
@@ -54,7 +54,7 @@ class DiagnosisService:
       else None
     )
 
-    response_text = groq_service.generate_response(
+    response_text = await groq_service.generate_response(
       user_message=message,
       symptoms=symptoms,
       diagnosticos=diagnosticos_names,

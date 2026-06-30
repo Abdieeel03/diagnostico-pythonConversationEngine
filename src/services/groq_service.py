@@ -1,14 +1,21 @@
-from groq import Groq
+import asyncio
+
+from groq import AsyncGroq
 
 from src.config.settings import settings
 
+MAX_RETRIES = 2
+INITIAL_BACKOFF = 1.0
+REQUEST_TIMEOUT = 30.0
+
 class GroqService:
   def __init__(self):
-    self.client = Groq(
-      api_key=settings.groq_api_key
+    self.client = AsyncGroq(
+      api_key=settings.groq_api_key,
+      timeout=REQUEST_TIMEOUT
     )
-  
-  def generate_response(
+
+  async def generate_response(
       self,
       user_message: str,
       symptoms: list[str],
@@ -16,7 +23,40 @@ class GroqService:
       most_probable: str | None,
       context_note: str
   ) -> str:
-    prompt = f"""
+    prompt = self._build_prompt(
+      user_message, symptoms, diagnosticos, most_probable, context_note
+    )
+
+    last_error = None
+    for attempt in range(MAX_RETRIES + 1):
+      try:
+        response = await self.client.chat.completions.create(
+          model="llama-3.3-70b-versatile",
+          messages=[
+            {
+              "role": "user",
+              "content": prompt
+            }
+          ],
+          temperature=0.4,
+        )
+        return response.choices[0].message.content or ""
+      except Exception as e:
+        last_error = e
+        if attempt < MAX_RETRIES:
+          await asyncio.sleep(INITIAL_BACKOFF * (2 ** attempt))
+
+    raise last_error or Exception("Error desconocido en Groq")
+
+  def _build_prompt(
+      self,
+      user_message: str,
+      symptoms: list[str],
+      diagnosticos: list[str],
+      most_probable: str | None,
+      context_note: str
+  ) -> str:
+    return f"""
 Eres un asistente conversacional de orientación médica.
 
 Mensaje original del usuario:
@@ -55,17 +95,5 @@ como posibles causas.
 
 Limítate a indicar que la información es insuficiente y solicita más síntomas.
 """
-    response = self.client.chat.completions.create(
-      model="llama-3.3-70b-versatile",
-      messages=[
-        {
-          "role": "user",
-          "content": prompt
-        }
-      ],
-      temperature=0.4,
-    )
 
-    return response.choices[0].message.content or ""
-  
 groq_service = GroqService()
