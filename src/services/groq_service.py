@@ -8,6 +8,53 @@ MAX_RETRIES = 2
 INITIAL_BACKOFF = 1.0
 REQUEST_TIMEOUT = 30.0
 
+SYSTEM_PROMPT = """
+Eres un asistente conversacional de orientación médica.
+
+Tu objetivo es conversar con el paciente para entender lo que siente a lo largo
+de varios mensajes. El usuario puede agregar, confirmar o corregir síntomas en
+cada mensaje. Interpreta referencias como "también tengo", "además", "y ahora...",
+"lo mismo pero más fuerte", "seguido de", etc. como ampliaciones del cuadro
+clínico, no como información independiente.
+
+Síntomas detectados en la conversación completa (pueden venir de varios mensajes):
+{accumulated_symptoms}
+
+Posibles enfermedades identificadas:
+{diagnosticos}
+
+Enfermedad con mayor compatibilidad:
+{most_probable}
+
+Contexto adicional:
+{context_note}
+
+Instrucciones:
+
+- Responde en español.
+- Usa un tono cercano y natural, como una conversación continua.
+- No menciones motores expertos, algoritmos, scores, porcentajes ni coincidencias.
+- No expliques cómo se obtuvo el resultado.
+- No inventes enfermedades que no aparezcan en la lista.
+- No inventes síntomas ni tratamientos.
+- No digas que es un diagnóstico definitivo.
+- Ten en cuenta el historial de la conversación: si el usuario amplió síntomas,
+  intégralo de forma natural en la respuesta.
+- Si la enfermedad más compatible se mantiene o se refuerza con los nuevos síntomas,
+  coméntalo brevemente. Si el cuadro cambió significativamente, reformula la
+  orientación.
+- Si hay pocos síntomas, responde máximo en 1 párrafo.
+- Máximo 2 párrafos.
+- Finaliza indicando que se trata de una orientación y que ante síntomas
+  persistentes debe consultarse a un profesional de salud.
+- No repitas varias veces que debe consultar a un profesional.
+
+MUY IMPORTANTE:
+Si no existe una enfermedad principal, no menciones enfermedades específicas
+como posibles causas. Limítate a indicar que la información es insuficiente y
+solicita más síntomas.
+"""
+
 class GroqService:
   def __init__(self):
     self.client = AsyncGroq(
@@ -21,10 +68,16 @@ class GroqService:
       symptoms: list[str],
       diagnosticos: list[str],
       most_probable: str | None,
-      context_note: str
+      context_note: str,
+      history: list[dict] | None = None,
   ) -> str:
-    prompt = self._build_prompt(
-      user_message, symptoms, diagnosticos, most_probable, context_note
+    messages = self._build_messages(
+      user_message=user_message,
+      symptoms=symptoms,
+      diagnosticos=diagnosticos,
+      most_probable=most_probable,
+      context_note=context_note,
+      history=history or [],
     )
 
     last_error = None
@@ -32,12 +85,7 @@ class GroqService:
       try:
         response = await self.client.chat.completions.create(
           model="llama-3.3-70b-versatile",
-          messages=[
-            {
-              "role": "user",
-              "content": prompt
-            }
-          ],
+          messages=messages,
           temperature=0.4,
         )
         return response.choices[0].message.content or ""
@@ -48,52 +96,32 @@ class GroqService:
 
     raise last_error or Exception("Error desconocido en Groq")
 
-  def _build_prompt(
+  def _build_messages(
       self,
       user_message: str,
       symptoms: list[str],
       diagnosticos: list[str],
       most_probable: str | None,
-      context_note: str
-  ) -> str:
-    return f"""
-Eres un asistente conversacional de orientación médica.
+      context_note: str,
+      history: list[dict],
+  ) -> list[dict]:
+    system_content = SYSTEM_PROMPT.format(
+      accumulated_symptoms=", ".join(symptoms) if symptoms else "ninguno",
+      diagnosticos=", ".join(diagnosticos) if diagnosticos else "ninguna",
+      most_probable=most_probable if most_probable else "ninguna",
+      context_note=context_note,
+    )
 
-Mensaje original del usuario:
-{user_message}
+    messages: list[dict] = [{"role": "system", "content": system_content}]
 
-Síntomas detectados:
-{", ".join(symptoms)}
+    for entry in history:
+      role = entry.get("role")
+      content = entry.get("content")
+      if role in ("user", "assistant") and content:
+        messages.append({"role": role, "content": content})
 
-Posibles enfermedades identificadas:
-{", ".join(diagnosticos) if diagnosticos else "ninguna"}
+    messages.append({"role": "user", "content": user_message})
 
-Enfermedad con mayor compatibilidad:
-{most_probable if most_probable else "ninguna"}
-
-Contexto adicional:
-{context_note}
-
-Instrucciones:
-
-- Responde en español.
-- Usa un tono cercano y natural.
-- No menciones motores expertos, algoritmos, scores, porcentajes ni coincidencias.
-- No expliques cómo se obtuvo el resultado.
-- No inventes enfermedades que no aparezcan en la lista.
-- No inventes síntomas ni tratamientos.
-- No digas que es un diagnóstico definitivo.
-- Explica brevemente cuál es la enfermedad más compatible y menciona otras posibilidades si existen.
-- Finaliza indicando que se trata de una orientación y que ante síntomas persistentes debe consultarse a un profesional de salud.
-- Si hay pocos síntomas, responde máximo en 1 párrafo.
-- Máximo 2 párrafos.
-- No repitas varias veces que debe consultar a un profesional.
-
-MUY IMPORTANTE:
-Si no existe una enfermedad principal, no menciones enfermedades específicas
-como posibles causas.
-
-Limítate a indicar que la información es insuficiente y solicita más síntomas.
-"""
+    return messages
 
 groq_service = GroqService()

@@ -4,7 +4,7 @@ Motor de conversación Python (FastAPI + Groq). Escucha en :8000. Lee primero el
 
 ## 1. Stack
 
-- **Python 3.12** (`python:3.12-slim` — pendiente pinnear digest).
+- **Python 3.12** (`python:3.12.9-slim` en Docker).
 - **FastAPI 0.136.3** + **Uvicorn 0.48.0** (WSGI/ASGI).
 - **Pydantic v2.13.4** para schemas.
 - **httpx 0.28.1** para llamadas a Prolog.
@@ -26,7 +26,7 @@ src/
   config/settings.py            → Settings (singleton)
   routes/
     chat_routes.py              → POST /chat
-    health_routes.py            → GET /health-prolog (proxy a Prolog)
+    health_routes.py            → GET /health, GET /health-prolog (proxy a Prolog)
   services/
     diagnosis_service.py        → orquestador
     nlp_service.py              → extracción síntomas
@@ -95,20 +95,26 @@ En `src/services/groq_service.py`. Instrucciones clave del system-prompt (hoy em
 | Método | Ruta | Body | Descripción |
 |---|---|---|---|
 | GET | `/` | — | Health root del servicio Python |
-| GET | `/health-prolog` | — | Proxy a `GET /health` de Prolog (devuelve tal cual) |
+| GET | `/health` | — | Health propio del servicio Python |
+| GET | `/health-prolog` | — | Proxy a `GET /health` de Prolog (reenvuelve con envelope propio) |
 | POST | `/chat` | `{"message": "..."}` | Orquestación completa |
 
 ## 8. Gotchas (no reintroducir)
 
-1. **`prolog_service.get_diagnostico`** en `RequestError` devuelve `{"status":"error", message, ...}` **sin** `success`; `diagnosis_service` hace `prolog_response.get("success")` → cae al fallback "No pude obtener un diagnóstico" **por accidente**. Si lo arreglas, verificar que el flujo de error no cambie.
-2. **`run.py` usa `reload=True`** incluso en el Dockerfile de prod → recarga innecesaria. Cambiar a `reload=False` (o condicional por env).
-3. **`groq_service` es síncrono** y sin timeout/reintentos → si el LLM tarda, el request se cuelga. Migrar a `AsyncGroq` + `async def` en routes/services.
-4. **`_extract_symptoms_with_confidence`** en `nlp_service.py` está definido pero **sin usar** (código muerto).
-5. **`health_routes.py`** devuelve la respuesta cruda de Prolog; no pasa por `success_response` → rompe el contrato del propio servicio Python.
-6. **No hay `/health`** propio del servicio Python (sólo `/health-prolog`).
-7. **`.venv/` y `backups/data_backup`** dentro del repo ❌ (verificar `.gitignore`).
-8. **Sin tests pytest** — sólo `scripts/test_*.py` sueltos. Configurar `pytest` + `pytest-asyncio` para tests del NLP y del orquestador con mocks de Prolog/Groq.
-9. **Sin type-checker** (mypy no instalado). Considerar `mypy` o `pyright` para los servicios.
+### Resueltos (no reintroducir)
+
+1. ~~**`prolog_service.get_diagnostico` sin `success` en error**~~ — ya devuelve `{success: false, message, data: null}` en `RequestError` y `HTTPStatusError`.
+2. ~~**`run.py` usa `reload=True` en prod**~~ — `reload` es condicional por env var `RELOAD` (`true`/`1`/`yes`); docker-compose setea `RELOAD=false`.
+3. ~~**`groq_service` síncrono sin timeout/reintentos**~~ — ya usa `AsyncGroq` con timeout de 30s, reintentos con backoff exponencial (`MAX_RETRIES=2`).
+4. ~~**`health_routes.py` sin `success_response`**~~ — `GET /health-prolog` ya reenvuelve con envelope propio vía `success_response`/`error_response`.
+5. ~~**Sin `/health` propio**~~ — ya existe `GET /health` en `health_routes.py`.
+
+### Vigentes
+
+1. **`_extract_symptoms_with_confidence`** en `nlp_service.py` está definido pero **sin usar** (código muerto).
+2. **Sin tests pytest** — sólo `scripts/test_*.py` sueltos. Configurar `pytest` + `pytest-asyncio`.
+3. **Sin type-checker** (mypy no instalado) ni lint (ruff no instalado).
+4. **Groq service sin fallback graceful** — si Groq falla tras reintentos, `generate_response` lanza excepción que propaga a 500; el usuario ve error genérico. Considerar fallback con mensaje estático.
 
 ## 9. Cómo extender
 
@@ -122,7 +128,7 @@ En `src/services/groq_service.py`. Instrucciones clave del system-prompt (hoy em
 
 | Comando | Uso |
 |---|---|
-| `python run.py` | arranque local (uvicorn :8000 reload=True) |
+| `python run.py` | arranque local (uvicorn :8000; `reload` depende de env var `RELOAD`) |
 | `curl -X POST http://localhost:8000/chat -H "Content-Type: application/json" -d '{"message":"tengo fiebre y tos"}' \| jq` | smoke test |
 | `python scripts/test_nlp.py` | smoke test NLP manual |
 | `python scripts/test_groq.py` | smoke test Groq manual (requiere GROQ_API_KEY) |
@@ -135,16 +141,18 @@ En `src/services/groq_service.py`. Instrucciones clave del system-prompt (hoy em
 ## 11. Docker
 
 ```dockerfile
-FROM python:3.12-slim
+FROM python:3.12.9-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8000
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" || exit 1
 CMD ["python", "run.py"]
 ```
 
-Mejoras pendientes: pinnear base image digest, `reload=False` (o env-driven), `HEALTHCHECK` curl `/health-prolog` o un nuevo `/health` propio.
+Mejora pendiente: pinnear imagen por digest SHA para builds 100% reproducibles.
 
 ## 12. Reglas para agentes (específicas)
 
