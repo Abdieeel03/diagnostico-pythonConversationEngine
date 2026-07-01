@@ -7,8 +7,11 @@ from src.utils.response import success_response
 router = APIRouter()
 
 @router.post("/chat")
-def chat(request: ChatRequest):
-  result = diagnosis_service.process_message(request.message)
+async def chat(request: ChatRequest):
+  result = await diagnosis_service.process_message(
+    message=request.message,
+    session_id=request.session_id
+  )
   return success_response(
     message="Respuesta generada correctamente",
     data=result
