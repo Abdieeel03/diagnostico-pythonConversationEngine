@@ -129,10 +129,6 @@ DIGESTIVE_SYMPTOMS = {
     "disfagia",
     "sensación de que la comida se queda atascada",
   ],
-  "dolor_garganta": [
-    "dolor en la garganta",
-    "garganta dolorida",
-  ],
   "mal_aliento": [
     "halitosis",
     "aliento fétido",

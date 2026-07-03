@@ -13,4 +13,11 @@ class Settings:
     self.port = int(os.getenv('PORT', '8000'))
     self.groq_api_key = os.getenv('GROQ_API_KEY', '')
 
+    self.database_url = os.getenv(
+      'DATABASE_URL',
+      'postgresql+asyncpg://diagnostico:diagnostico_secret@localhost:5432/diagnostico_db'
+    )
+
+    self.auto_migrate = os.getenv('AUTO_MIGRATE', 'true').lower() in ('true', '1', 'yes')
+
 settings = Settings()
