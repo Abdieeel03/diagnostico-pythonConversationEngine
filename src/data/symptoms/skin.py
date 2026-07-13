@@ -56,13 +56,11 @@ SKIN_SYMPTOMS = {
   ],
   "prurito": [
     "prurito",
-    "me pica",
     "rascarse",
     "picazón",
     "picor",
     "comezón",
     "rasquera",
-    "me pica mucho",
   ],
   "piel_seca": [
     "piel seca",
@@ -103,12 +101,10 @@ SKIN_SYMPTOMS = {
   ],
   "quemazon": [
     "quemazón",
-    "me quema",
-    "sensación de calor",
+    "sensación de quemazón",
     "escozor",
     "ardor",
     "sensación de ardor",
-    "me arde",
   ],
   "ampollas": [
     "ampollas",
@@ -183,7 +179,6 @@ SKIN_SYMPTOMS = {
   ],
   "descamacion": [
     "descamación",
-    "se me cae la piel",
     "pellejitos",
     "despellejamiento",
   ],
@@ -201,7 +196,7 @@ SKIN_SYMPTOMS = {
   ],
   "perdida_cabello": [
     "pérdida de cabello",
-    "se me cae el pelo",
+    "caída de pelo",
     "alopecia",
     "calvicie",
     "caída de cabello",
@@ -361,7 +356,7 @@ SKIN_SYMPTOMS = {
   ],
   "malestar_general": [
     "malestar general",
-    "me siento mal",
+    "sentirse mal",
     "malestar",
     "decaimiento",
   ],
@@ -385,7 +380,6 @@ SKIN_SYMPTOMS = {
     "sensibilidad a la luz",
     "fotofobia",
     "molestia con la luz",
-    "me molesta la luz",
   ],
   "hinchazon_testicular": [
     "hinchazón testicular",
