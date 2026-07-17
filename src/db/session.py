@@ -14,11 +14,11 @@ from src.config.settings import settings
 
 _SSLMODE_TO_ASYNCPG = {
   'disable': False,
-  'allow': True,
-  'prefer': True,
-  'require': True,
-  'verify-ca': True,
-  'verify-full': True,
+  'allow': 'allow',
+  'prefer': 'prefer',
+  'require': 'require',
+  'verify-ca': 'verify-ca',
+  'verify-full': 'verify-full',
 }
 
 
