@@ -18,22 +18,35 @@ def _run_alembic_upgrade_head() -> None:
   print('[run] Migraciones aplicadas.')
 
 
-def _seed_if_empty_sync() -> None:
+def _psycopg2_connect_from_settings():
   import psycopg2
-  from scripts.seed_symptoms import _parse_symptoms_from_prolog, _find_prolog_facts_path
+
+  from urllib.parse import urlparse, parse_qs
 
   sync_url = settings.database_url.replace('postgresql+asyncpg://', 'postgresql://', 1)
   sync_url = sync_url.replace('postgresql+psycopg2://', 'postgresql://', 1)
-  from urllib.parse import urlparse
   parsed = urlparse(sync_url)
+  query = parse_qs(parsed.query)
 
-  conn = psycopg2.connect(
+  sslmode = query.get('sslmode', [None])[0]
+  connect_kwargs = {}
+  if sslmode:
+    connect_kwargs['sslmode'] = sslmode
+
+  return psycopg2.connect(
     host=parsed.hostname,
     port=parsed.port or 5432,
     user=parsed.username,
     password=parsed.password,
     dbname=parsed.path.lstrip('/'),
+    **connect_kwargs,
   )
+
+
+def _seed_if_empty_sync() -> None:
+  from scripts.seed_symptoms import _parse_symptoms_from_prolog, _find_prolog_facts_path
+
+  conn = _psycopg2_connect_from_settings()
   conn.autocommit = True
   cur = conn.cursor()
   cur.execute('SELECT 1 FROM sintoma_catalogo LIMIT 1')
@@ -46,13 +59,7 @@ def _seed_if_empty_sync() -> None:
   conn.close()
 
   catalogo = _parse_symptoms_from_prolog(_find_prolog_facts_path())
-  conn = psycopg2.connect(
-    host=parsed.hostname,
-    port=parsed.port or 5432,
-    user=parsed.username,
-    password=parsed.password,
-    dbname=parsed.path.lstrip('/'),
-  )
+  conn = _psycopg2_connect_from_settings()
   cur = conn.cursor()
   args = [(k, v) for k, v in catalogo.items()]
   from psycopg2.extras import execute_values

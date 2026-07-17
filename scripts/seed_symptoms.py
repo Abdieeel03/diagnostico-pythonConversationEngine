@@ -1,8 +1,12 @@
 """Seed del catálogo de síntomas desde el módulo Prolog.
 
-Lee `diagnostico-prologEngine/src/knowledge/facts/sintomas.pl` y carga todos
-los átomos únicos en la tabla `sintoma_catalogo`. Si el átomo ya existe, lo deja
-igual (ON CONFLICT DO NOTHING).
+Lee el archivo `sintomas.pl` y carga todos los átomos únicos en la tabla
+`sintoma_catalogo`. Si el átomo ya existe, lo deja igual (ON CONFLICT DO NOTHING).
+
+Busca el archivo en este orden:
+1. `PROLOG_FACTS_PATH` (env var).
+2. Copia local en `src/data/prolog_facts/sintomas.pl` (incluida en el Docker).
+3. Submódulo Prolog hermano (sólo en dev local, sin Docker).
 
 Uso:
     python scripts/seed_symptoms.py
@@ -25,15 +29,16 @@ from src.db.session import get_sessionmaker
 def _find_prolog_facts_path() -> Path:
   here = Path(__file__).resolve().parent
   candidates = [
-    here.parent.parent / 'diagnostico-prologEngine' / 'src' / 'knowledge' / 'facts' / 'sintomas.pl',
-    Path('/app/diagnostico-prologEngine/src/knowledge/facts/sintomas.pl'),
     Path(os.getenv('PROLOG_FACTS_PATH', '')),
+    here.parent / 'src' / 'data' / 'prolog_facts' / 'sintomas.pl',
+    Path('/app/src/data/prolog_facts/sintomas.pl'),
+    here.parent.parent / 'diagnostico-prologEngine' / 'src' / 'knowledge' / 'facts' / 'sintomas.pl',
   ]
   for c in candidates:
     if c and c.is_file():
       return c
   raise FileNotFoundError(
-    'No se encontró sintomas.pl. Definí PROLOG_FACTS_PATH o montá el submódulo Prolog.'
+    'No se encontró sintomas.pl. Definí PROLOG_FACTS_PATH o incluí el archivo en src/data/prolog_facts/.'
   )
 
 
