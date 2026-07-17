@@ -164,6 +164,7 @@ Respuesta de `/chat`:
 4. ~~**`health_routes.py` sin `success_response`**~~ — `GET /health-prolog` ya reenvuelve con envelope propio.
 5. ~~**Sin `/health` propio**~~ — ya existe `GET /health` en `health_routes.py`.
 6. ~~**Memoria de chat en RAM (`_SessionStore`)**~~ — reemplazado por Postgres + repositorio. El `_SessionStore` fue eliminado de `diagnosis_service.py`.
+7. ~~**SSL no propagado al runtime asyncpg**~~ — `db/session.py` ahora adapta la URL: extrae `sslmode` del query string y lo pasa como `ssl=True` (o `False`) en `connect_args` para `asyncpg.connect()`, que es el formato que asyncpg espera. El seed (que usa `psycopg2` directamente) sigue pasando `sslmode` como kwarg, que también es válido.
 
 ### Vigentes
 
